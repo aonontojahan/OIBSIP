@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator | OIBSIP Task 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="calculator" aria-label="Calculator">
+      <header class="calc-header">
+        <h1>CALCULATOR</h1>
+      </header>
+
+      <!-- Display screen: shows current input + result (click result to copy) -->
+      <div class="display" aria-live="polite">
+        <div id="expression" class="display-expression" aria-label="Expression">&nbsp;</div>
+        <div id="result" class="display-result copyable" aria-label="Result" title="Click to copy result">0</div>
+        <div id="copyToast" class="copy-toast" role="status" aria-live="polite">Copied!</div>
+      </div>
+
+      <!-- Button grid: CSS Grid layout, no inline onclick -->
+      <div class="buttons" role="grid" aria-label="Calculator buttons">
+        <button type="button" class="btn btn-func" data-action="clear" aria-label="Clear">C</button>
+        <button type="button" class="btn btn-func" data-action="delete" aria-label="Backspace">&#9003;</button>
+        <button type="button" class="btn btn-func" data-action="percent" aria-label="Percent">%</button>
+        <button type="button" class="btn btn-op" data-action="operator" data-value="/" aria-label="Divide">&divide;</button>
+
+        <button type="button" class="btn btn-num" data-action="number" data-value="7">7</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="8">8</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="9">9</button>
+        <button type="button" class="btn btn-op" data-action="operator" data-value="*" aria-label="Multiply">&times;</button>
+
+        <button type="button" class="btn btn-num" data-action="number" data-value="4">4</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="5">5</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="6">6</button>
+        <button type="button" class="btn btn-op" data-action="operator" data-value="-" aria-label="Subtract">&minus;</button>
+
+        <button type="button" class="btn btn-num" data-action="number" data-value="1">1</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="2">2</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="3">3</button>
+        <button type="button" class="btn btn-op" data-action="operator" data-value="+" aria-label="Add">+</button>
+
+        <button type="button" class="btn btn-num btn-zero" data-action="number" data-value="0">0</button>
+        <button type="button" class="btn btn-num" data-action="decimal" data-value=".">.</button>
+        <button type="button" class="btn btn-equals" data-action="equals" aria-label="Equals">=</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
