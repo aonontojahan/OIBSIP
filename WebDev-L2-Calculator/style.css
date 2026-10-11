@@ -131,7 +131,7 @@ body {
   font-weight: 600;
 }
 
-/* Button layout: CSS Grid */
+/* Button layout : CSS Grid */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
