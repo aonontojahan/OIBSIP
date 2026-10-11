@@ -94,7 +94,7 @@ function appendDecimal() {
 function appendOperator(op) {
   if (errorState) return;
   if (expression === "") {
-    // Allow starting a negative number, ignore other leading operators
+    // Allow starting a negative number
     if (op === "-") {
       expression = "-";
       updateDisplay();
