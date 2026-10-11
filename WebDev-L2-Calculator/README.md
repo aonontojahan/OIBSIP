@@ -36,3 +36,6 @@ Operator chaining is supported without requiring a full reset (e.g. `5+3×2 = 11
 Name: Aononto Jahan Junnurain
 Mail: aonontojahan@gmail.com
 Phon: +8801723740704
+
+
+© 2026 Aononto Jahan. All Rights Reserved.
