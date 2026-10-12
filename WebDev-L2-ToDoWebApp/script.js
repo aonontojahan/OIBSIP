@@ -172,11 +172,14 @@ function taskHTML(task) {
   }
   time += '</div>';
 
+  var editBtn = task.completed ? '' :
+    '<button class="icon-btn edit-btn" data-action="edit" title="Edit">✎</button>';
+
   return '<li class="' + liClass + '" data-id="' + task.id + '">' +
     '<button class="tick" data-action="toggle" title="Mark complete">' + tick + '</button>' +
     '<div class="task-body"><div class="task-text">' + escapeHtml(task.text) + '</div>' + time + '</div>' +
     '<div class="task-actions">' +
-    '<button class="icon-btn edit-btn" data-action="edit" title="Edit">✎</button>' +
+    editBtn +
     '<button class="icon-btn del-btn" data-action="delete" title="Delete">🗑</button>' +
     '</div></li>';
 }

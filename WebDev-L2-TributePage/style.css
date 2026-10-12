@@ -1064,6 +1064,16 @@ footer span {
 	font-family: monospace;
 }
 
+footer a {
+	color: #d9a441;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+footer a:hover {
+	text-decoration: underline;
+}
+
 /*reveal animation--------------------------------*/
 .reveal {
 	opacity: 0;
