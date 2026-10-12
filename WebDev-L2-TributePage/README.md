@@ -37,4 +37,4 @@ Mail: aonontojahan@gmail.com
 Phon: +8801723740704
 
 
-© 2026 Aononto Jahan. All Rights Reserved.
+Copyright © 2026 aonontojahan.vercel.app. All Rights Reserved.
