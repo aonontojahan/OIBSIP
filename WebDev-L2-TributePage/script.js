@@ -29,7 +29,7 @@ function syncHeader() {
 window.addEventListener("scroll", syncHeader, { passive: true });
 syncHeader();
 
-// Duplicate career cards once so the row loops seamlessly (no inline onclick).
+// Duplicate the career cards once so the row loops seamlessly (no inline onclick).
 const journeyTrack = document.querySelector(".journey-track");
 
 if (journeyTrack) {
@@ -41,7 +41,7 @@ if (journeyTrack) {
 	});
 }
 
-// Duplicate achievement cards once so that row loops seamlessly too.
+// Duplicate theachievement cards once so that row loops seamlessly too.
 const recordsTrack = document.querySelector(".records-track");
 
 if (recordsTrack) {
