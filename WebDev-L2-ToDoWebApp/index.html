@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow · To-Do Web App | OIBSIP Task 3</title>
+  <meta name="description" content="Interactive to-do list app with add, complete, edit, delete, timestamps and localStorage persistence." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <main class="app">
+    <header class="hero">
+      <div class="hero-badge">OIBSIP · WebDev L2 · Task 3</div>
+      <h1>Task<span>Flow</span></h1>
+      <p class="subtitle">Organise your day — add, complete, edit &amp; track tasks with ease.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num" id="stat-total">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat stat-pending">
+          <span class="stat-num" id="stat-pending">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+        <div class="stat stat-done">
+          <span class="stat-num" id="stat-completed">0</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <span>Progress</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="add-card">
+      <form id="task-form" autocomplete="off">
+        <div class="input-group">
+          <span class="input-icon">✎</span>
+          <input
+            type="text"
+            id="task-input"
+            placeholder="What needs to be done today? e.g. Finish OIBSIP report…"
+            maxlength="200"
+            aria-label="New task text"
+          />
+        </div>
+        <button type="submit" class="btn-add" id="add-btn">
+          <span class="plus">+</span> Add Task
+        </button>
+      </form>
+      <div class="toolbar">
+        <div class="filter-pills" role="tablist" aria-label="Filter tasks">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="pending">Pending</button>
+          <button class="pill" data-filter="completed">Completed</button>
+        </div>
+        <button class="link-btn" id="clear-completed" title="Remove all completed tasks">Clear completed</button>
+      </div>
+      <p class="hint" id="form-error" role="alert" hidden>Please enter a task before adding.</p>
+    </section>
+
+    <div class="lists" id="lists-container">
+      <section class="list-card" aria-labelledby="pending-title">
+        <div class="list-head">
+          <h2 id="pending-title"><span class="dot dot-pending"></span> Pending Tasks</h2>
+          <span class="count-badge pending-badge" id="pending-count">0 pending</span>
+        </div>
+        <ul class="task-list" id="pending-list"></ul>
+        <div class="empty" id="pending-empty">
+          <div class="empty-emoji">🗒️</div>
+          <p><strong>All clear — nothing pending!</strong></p>
+          <p class="empty-sub">Add your first task above to get started.</p>
+        </div>
+      </section>
+
+      <section class="list-card" aria-labelledby="completed-title">
+        <div class="list-head">
+          <h2 id="completed-title"><span class="dot dot-done"></span> Completed Tasks</h2>
+          <span class="count-badge done-badge" id="completed-count">0 completed</span>
+        </div>
+        <ul class="task-list" id="completed-list"></ul>
+        <div class="empty" id="completed-empty">
+          <div class="empty-emoji">🎉</div>
+          <p><strong>No tasks completed yet.</strong></p>
+          <p class="empty-sub">Tick off a pending task and it will show up here.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>Tasks auto-save in your browser via <code>localStorage</code> · Built with HTML5, CSS3 &amp; Vanilla JS</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
