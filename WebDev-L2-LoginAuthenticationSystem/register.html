@@ -3,142 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up — AuthGuard</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>TaskFlow — Sign Up</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="locked">
-
-  <!-- ===== Navbar ===== -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">🛡</span>
-        <span class="brand-name">AuthGuard</span>
-      </a>
+<body class="auth-body">
+  <nav class="landing-nav">
+    <div class="landing-nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><span>✓</span></span> TaskFlow</a>
       <div class="nav-links">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="login.html">Login</a>
-        <a class="nav-link btn-nav active" href="register.html">Sign Up</a>
+        <a class="nav-pill" href="register.html">Sign Up</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===== Register card ===== -->
-  <main class="auth-wrap auth-compact">
-    <div class="auth-card single">
-      <div class="auth-form-box">
-        <h2>Create account</h2>
-        <p class="muted">Fill in the details below to register.</p>
+  <main class="auth-main">
+    <form class="auth-card" id="register-form" novalidate>
+      <h2>Create account 🎉</h2>
+      <p class="sub">Join TaskFlow and organize your day.</p>
+      <div class="form-error" id="reg-error" hidden></div>
+      <div class="form-success" id="reg-success" hidden></div>
 
-        <div class="alert alert-error" id="form-error" role="alert"></div>
-        <div class="alert alert-success" id="form-success" role="status"></div>
-
-        <form id="register-form" autocomplete="off" novalidate>
-          <div class="field">
-            <label for="reg-username">Username</label>
-            <input type="text" id="reg-username" placeholder="e.g. aononto_07" maxlength="30">
-          </div>
-          <div class="field">
-            <label for="reg-email">Email</label>
-            <input type="email" id="reg-email" placeholder="you@example.com" maxlength="80">
-          </div>
-          <div class="field">
-            <label for="reg-password">Password</label>
-            <div class="pass-wrap">
-              <input type="password" id="reg-password" placeholder="Minimum 8 characters + 1 number" maxlength="72">
-              <button type="button" class="pass-toggle" data-toggle="reg-password" title="Show password">👁</button>
-            </div>
-            <div class="strength" id="strength-bar"><i></i></div>
-            <p class="strength-text" id="strength-text">Use 8+ characters with at least 1 number.</p>
-          </div>
-          <div class="field">
-            <label for="reg-confirm">Confirm password</label>
-            <input type="password" id="reg-confirm" placeholder="Repeat your password" maxlength="72">
-          </div>
-          <button type="submit" class="btn btn-primary btn-block" id="register-btn">Register</button>
-        </form>
-
-        <p class="form-switch">Already have an account? <a href="login.html">Login here</a></p>
+      <div class="field">
+        <label for="reg-username">Username</label>
+        <input type="text" id="reg-username" placeholder="e.g. aonontojahan" autocomplete="username" maxlength="30">
+        <p class="field-error" id="err-username" hidden></p>
       </div>
-    </div>
+      <div class="field">
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" placeholder="you@example.com" autocomplete="email" maxlength="80">
+        <p class="field-error" id="err-email" hidden></p>
+      </div>
+      <div class="field">
+        <label for="reg-password">Password</label>
+        <div class="pass-wrap">
+          <input type="password" id="reg-password" placeholder="Min 8 characters + 1 number" autocomplete="new-password">
+          <button type="button" class="toggle-pass" data-for="reg-password">Show</button>
+        </div>
+        <div class="strength"><span id="strength-bar"></span></div>
+        <p class="strength-text" id="strength-text">Use 8+ characters with at least 1 number.</p>
+        <p class="field-error" id="err-password" hidden></p>
+      </div>
+      <div class="field">
+        <label for="reg-confirm">Confirm password</label>
+        <div class="pass-wrap">
+          <input type="password" id="reg-confirm" placeholder="Repeat your password" autocomplete="new-password">
+          <button type="button" class="toggle-pass" data-for="reg-confirm">Show</button>
+        </div>
+        <p class="field-error" id="err-confirm" hidden></p>
+      </div>
+
+      <button class="btn-primary auth-btn" type="submit" id="register-btn">Register</button>
+      <p class="auth-switch">Already have an account? <a href="login.html">Login</a></p>
+    </form>
   </main>
 
-  <footer class="site-footer dark">
-    <p>Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.</p>
+  <footer class="landing-footer">
+    Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.
   </footer>
 
   <script src="auth.js"></script>
-  <script>
-    Auth.redirectIfAuthed();
-
-    var form = document.getElementById('register-form');
-    var errBox = document.getElementById('form-error');
-    var okBox = document.getElementById('form-success');
-    var pwInput = document.getElementById('reg-password');
-    var bar = document.getElementById('strength-bar');
-    var barText = document.getElementById('strength-text');
-
-    function showError(msg) {
-      okBox.classList.remove('show');
-      errBox.textContent = msg;
-      errBox.classList.add('show');
-    }
-    function showSuccess(msg) {
-      errBox.classList.remove('show');
-      okBox.textContent = msg;
-      okBox.classList.add('show');
-    }
-
-    // Live password-strength meter
-    pwInput.addEventListener('input', function () {
-      var v = pwInput.value;
-      var score = 0;
-      if (v.length >= 8) score++;
-      if (/\d/.test(v)) score++;
-      if (v.length >= 12 || /[^A-Za-z0-9]/.test(v)) score++;
-      var fill = bar.querySelector('i');
-      bar.classList.remove('mid', 'ok');
-      if (!v) { fill.style.width = '0'; barText.textContent = 'Use 8+ characters with at least 1 number.'; }
-      else if (score <= 1) { fill.style.width = '33%'; barText.textContent = 'Weak — add more characters and a number.'; }
-      else if (score === 2) { fill.style.width = '66%'; bar.classList.add('mid'); barText.textContent = 'Medium — looking good.'; }
-      else { fill.style.width = '100%'; bar.classList.add('ok'); barText.textContent = 'Strong password. Nice!'; }
-    });
-
-    // Show / hide password
-    document.querySelectorAll('.pass-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var field = document.getElementById(btn.getAttribute('data-toggle'));
-        var show = field.type === 'password';
-        field.type = show ? 'text' : 'password';
-        btn.textContent = show ? '🙈' : '👁';
-      });
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var username = document.getElementById('reg-username').value;
-      var email = document.getElementById('reg-email').value;
-      var password = pwInput.value;
-      var confirm = document.getElementById('reg-confirm').value;
-
-      if (!username.trim() || !email.trim() || !password || !confirm) {
-        showError('Please fill in all fields.');
-        return;
-      }
-      if (password !== confirm) {
-        showError('Passwords do not match. Please re-type them.');
-        return;
-      }
-
-      var res = Auth.register(username, email, password);
-      if (!res.ok) { showError(res.message); return; }
-
-      showSuccess(res.message + ' Redirecting to login…');
-      form.reset();
-      setTimeout(function () { window.location.href = 'login.html'; }, 1400);
-    });
-  </script>
+  <script>initRegister();</script>
 </body>
 </html>

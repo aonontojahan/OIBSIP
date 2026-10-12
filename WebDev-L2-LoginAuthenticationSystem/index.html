@@ -3,54 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuthGuard — Simple & Secure Login System</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>TaskFlow — Organize Today. Achieve Tomorrow.</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="locked">
-
-  <!-- ===== Navbar ===== -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">🛡</span>
-        <span class="brand-name">AuthGuard</span>
-      </a>
-      <div class="nav-links" id="nav-links">
-        <a class="nav-link active" href="index.html">Home</a>
+<body class="landing-body">
+  <nav class="landing-nav">
+    <div class="landing-nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><span>✓</span></span> TaskFlow</a>
+      <div class="nav-links">
+        <a class="nav-pill" href="index.html">Home</a>
         <a class="nav-link" href="login.html">Login</a>
-        <a class="nav-link btn-nav" href="register.html">Sign Up</a>
+        <a class="nav-cta" href="register.html">Sign Up</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===== Hero ===== -->
-  <header class="hero">
-    <div class="hero-inner hero-center">
-      <h1>Simple Login.<br>Secure by <span class="grad">Design.</span></h1>
-      <p>Register an account, log in with validation and hashed passwords, and unlock your personal dashboard with analytics.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="register.html">Create Account</a>
-        <a class="btn btn-ghost" href="login.html">Login</a>
+  <main class="hero-wrap">
+    <div class="blob blob-pink"></div>
+    <div class="blob blob-blue"></div>
+    <div class="blob blob-purple"></div>
+    <div class="hero">
+      <h1>Organize Today.<br>Achieve <span class="grad-text">Tomorrow.</span></h1>
+      <p>Create your free account, keep your tasks safe and personal, and open your daily dashboard to track, complete, and celebrate every task.</p>
+      <div class="hero-btns">
+        <a href="register.html"><button class="btn-primary" type="button">Get Started Free</button></a>
+        <a href="login.html"><button class="btn-white" type="button">Login</button></a>
       </div>
     </div>
-  </header>
+  </main>
 
-  <footer class="site-footer dark">
-    <p>Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.</p>
+  <footer class="landing-footer">
+    Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.
   </footer>
 
-  <script src="auth.js"></script>
   <script>
-    // Logged-in visitors see a Dashboard shortcut in the navbar
-    (function () {
-      if (Auth.currentUser()) {
-        document.getElementById('nav-links').innerHTML =
-          '<a class="nav-link active" href="index.html">Home</a>' +
-          '<a class="nav-link btn-nav" href="dashboard.html">Go to Dashboard →</a>';
-      }
-    })();
+    // Logged-in users skip straight to the dashboard
+    if (sessionStorage.getItem('taskflow_session')) {
+      window.location.href = 'dashboard.html';
+    }
   </script>
 </body>
 </html>

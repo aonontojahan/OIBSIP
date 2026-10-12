@@ -3,228 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — AuthGuard</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>TaskFlow — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-
-  <div class="dash">
-    <!-- ===== Sidebar ===== -->
-    <aside class="sidebar">
-      <div class="side-user">
-        <span class="avatar" id="avatar">A</span>
-        <div>
-          <b id="side-username">…</b>
-          <small id="side-email">…</small>
+<body class="dash-body">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="dashboard.html"><span class="brand-mark"><span>✓</span></span> TaskFlow</a>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Search tasks..." autocomplete="off">
+      </div>
+      <div class="user-menu">
+        <button class="user-chip" id="user-chip" type="button" aria-haspopup="true" aria-expanded="false" title="Account">
+          <span>👋</span> <span id="username-label">user</span> <span class="avatar" id="avatar">U</span> <span class="caret">▾</span>
+        </button>
+        <div class="user-dropdown" id="user-dropdown" hidden>
+          <div class="dropdown-user" id="dropdown-user">user</div>
+          <button class="logout-btn" id="logout-btn" type="button">Logout</button>
         </div>
       </div>
-      <a class="side-link active" href="dashboard.html">📊 <span class="lbl">Overview</span></a>
-      <a class="side-link" href="#charts">📈 <span class="lbl">Analytics</span></a>
-      <a class="side-link" href="#account">👤 <span class="lbl">My Account</span></a>
-      <div class="side-foot">
-        <button class="side-link logout-btn" id="side-logout">⏻ <span class="lbl">Logout</span></button>
-      </div>
-    </aside>
+    </div>
+  </header>
 
-    <!-- ===== Main ===== -->
-    <main class="main">
-      <div class="topbar-dash">
-        <div>
-          <h1 id="welcome-title">Dashboard</h1>
-          <p id="welcome-sub">Here's what's happening with your account.</p>
-        </div>
-        <button class="btn-logout" id="logout-btn">Logout</button>
+  <div class="dash-wrap">
+    <section class="welcome">
+      <div>
+        <h2 id="welcome-title">Welcome Back! 👋</h2>
+        <p>Here's an overview of your productivity today.</p>
       </div>
+      <div class="date-pill">📅 <span id="today-pill">—</span></div>
+    </section>
 
-      <!-- Stat cards -->
-      <div class="stat-grid">
-        <div class="stat">
-          <small>Member Since</small>
-          <b id="stat-joined">—</b>
-        </div>
-        <div class="stat">
-          <small>Total Logins</small>
-          <b id="stat-logins">—</b>
-        </div>
-        <div class="stat">
-          <small>Last Login</small>
-          <b id="stat-last">—</b>
-        </div>
-        <div class="stat">
-          <small>Registered Users</small>
-          <b id="stat-users">—</b>
-        </div>
-      </div>
+    <section class="stats">
+      <div class="stat"><div class="stat-icon si-total">☰</div><div><b id="stat-total">0</b><span>Total Tasks</span></div></div>
+      <div class="stat"><div class="stat-icon si-pending">◷</div><div><b id="stat-pending">0</b><span>Pending</span></div></div>
+      <div class="stat"><div class="stat-icon si-done">✓</div><div><b id="stat-completed">0</b><span>Completed</span></div></div>
+      <div class="stat"><div class="stat-icon si-due">📅</div><div><b id="stat-due">0</b><span>Due Today</span></div></div>
+    </section>
 
-      <!-- Charts -->
-      <div class="charts" id="charts">
-        <div class="chart-card full">
-          <h3>📈 Weekly Activity — Line Graph</h3>
-          <p class="csub">Your sign-ins over the last 7 days (sample analytics).</p>
-          <svg id="line-chart" viewBox="0 0 560 230" role="img" aria-label="Weekly activity line chart"></svg>
+    <main class="dash-grid">
+      <!-- LEFT: tasks -->
+      <section class="tasks-col">
+        <div class="card">
+          <div class="card-head">
+            <h3>◔ My Tasks</h3>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="pager">
+                <button id="page-prev" type="button" title="Previous page">‹</button>
+                <span id="page-info">1/1</span>
+                <button id="page-next" type="button" title="Next page">›</button>
+              </div>
+              <button class="view-all" id="view-all" type="button">View All</button>
+            </div>
+          </div>
+          <form class="add-row" id="add-form" autocomplete="off">
+            <input type="text" id="new-title" placeholder="Add a new task..." maxlength="150">
+            <select id="new-category">
+              <option value="Study">Study</option>
+              <option value="Personal">Personal</option>
+              <option value="Health">Health</option>
+              <option value="Work">Work</option>
+            </select>
+            <input type="date" id="new-date">
+            <input type="time" id="new-time" title="Time (optional)" style="max-width:110px">
+            <button class="add-btn" type="submit">+ Add</button>
+          </form>
+          <p class="field-error" id="add-error" hidden></p>
+          <div class="filter-tabs" id="filters">
+            <button class="ftab active" data-filter="all" type="button">All</button>
+            <button class="ftab" data-filter="today" type="button">Today</button>
+            <button class="ftab" data-filter="upcoming" type="button">Upcoming</button>
+            <button class="ftab" data-filter="completed" type="button">Completed</button>
+          </div>
+          <div id="task-list"></div>
         </div>
-        <div class="chart-card">
-          <h3>📊 Logins by Day — Bar Chart</h3>
-          <p class="csub">Sessions per weekday (sample analytics).</p>
-          <div class="bars" id="bar-chart"></div>
-        </div>
-        <div class="chart-card">
-          <h3>🍩 Sessions by Device — Pie Chart</h3>
-          <p class="csub">Where you log in from (sample analytics).</p>
-          <div class="donut-flex">
-            <svg id="pie-chart" viewBox="0 0 120 120" role="img" aria-label="Sessions by device pie chart"></svg>
-            <ul class="legend" id="pie-legend"></ul>
+      </section>
+
+      <!-- MIDDLE -->
+      <section>
+        <div class="card">
+          <div class="card-head"><h3>📊 Today's Progress</h3></div>
+          <div class="ring-wrap">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <circle cx="65" cy="65" r="52" fill="none" stroke="#e8edf5" stroke-width="13"/>
+              <circle id="ring" cx="65" cy="65" r="52" fill="none" stroke="#2f6bf0" stroke-width="13"
+                stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="163" transform="rotate(-90 65 65)"/>
+              <text id="ring-text" x="65" y="62" text-anchor="middle" font-size="21" font-weight="800" fill="#17233b">0%</text>
+              <text x="65" y="80" text-anchor="middle" font-size="11" fill="#8a94a8">Completed</text>
+            </svg>
           </div>
         </div>
-      </div>
 
-      <!-- Account + activity -->
-      <div class="two-col" id="account">
-        <div class="info-card">
-          <h3>👤 Account Details</h3>
-          <div class="kv"><span>Username</span><b id="info-username">—</b></div>
-          <div class="kv"><span>Email</span><b id="info-email">—</b></div>
-          <div class="kv"><span>Member since</span><b id="info-joined">—</b></div>
-          <div class="kv"><span>Password storage</span><b>Salted SHA-256 hash 🔒</b></div>
+        <div class="card">
+          <div class="card-head"><h3>📈 Weekly Activity</h3><span class="mini-tag">Tasks / day</span></div>
+          <div class="bars" id="week-bars"></div>
         </div>
-        <div class="info-card">
-          <h3>🕒 Recent Activity</h3>
-          <ul class="activity" id="activity-list"></ul>
-        </div>
-      </div>
+      </section>
 
-      <footer class="dash-footer">
-        <p>Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.</p>
-      </footer>
+      <!-- RIGHT -->
+      <section>
+        <div class="card" style="text-align:center">
+          <div class="card-head"><h3>🎯 Completion Rate</h3></div>
+          <div class="big-pct" id="rate-pct">0%</div>
+          <p class="center-sub">of tasks done</p>
+          <div class="progress-line"><span id="rate-bar" style="width:0%"></span></div>
+          <div class="split"><span><b id="rate-done">0</b> <span style="color:var(--muted);font-weight:400">done</span></span><span><b id="rate-pending">0</b> <span style="color:var(--muted);font-weight:400">pending</span></span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>🚀 Completion Trend</h3><span class="mini-tag">Cumulative</span></div>
+          <svg id="trend-svg" width="100%" height="130" viewBox="0 0 300 130" preserveAspectRatio="none"></svg>
+        </div>
+      </section>
     </main>
   </div>
 
+  <footer class="dash-footer">
+    Copyright © 2026 <a href="https://aonontojahan.vercel.app" target="_blank" rel="noopener">aonontojahan.vercel.app</a>. All Rights Reserved.
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
   <script src="auth.js"></script>
-  <script>
-    // ---- Protected page: bounce visitors without a session ----
-    var user = Auth.requireAuth();
-    if (!user) { /* redirected to login.html */ }
-    else {
-      initDashboard(user);
-    }
-
-    function initDashboard(user) {
-      var created = new Date(user.createdAt);
-      var lastLogin = user.lastLogin ? new Date(user.lastLogin) : null;
-      var dateOpts = { day: 'numeric', month: 'short', year: 'numeric' };
-
-      // ---- Header + stats ----
-      document.getElementById('avatar').textContent = user.username.charAt(0).toUpperCase();
-      document.getElementById('side-username').textContent = user.username;
-      document.getElementById('side-email').textContent = user.email;
-      document.getElementById('welcome-title').textContent = 'Welcome, ' + user.username + ' 👋';
-      document.getElementById('stat-joined').textContent = created.toLocaleDateString([], dateOpts);
-      document.getElementById('stat-logins').textContent = user.logins || 1;
-      document.getElementById('stat-last').textContent = lastLogin
-        ? lastLogin.toLocaleString([], { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
-        : 'Just now';
-      document.getElementById('stat-users').textContent = Auth.userCount();
-
-      document.getElementById('info-username').textContent = user.username;
-      document.getElementById('info-email').textContent = user.email;
-      document.getElementById('info-joined').textContent = created.toLocaleDateString([], { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
-      // ---- Deterministic demo data from username (stable per user) ----
-      var seed = 0;
-      for (var i = 0; i < user.username.length; i++) seed = (seed * 31 + user.username.charCodeAt(i)) >>> 0;
-      function rand() {
-        seed = (seed * 1664525 + 1013904223) >>> 0;
-        return seed / 4294967296;
-      }
-      var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      var weekly = days.map(function () { return 1 + Math.floor(rand() * 9); });
-
-      renderLineChart(weekly, days);
-      renderBarChart(weekly, days);
-      renderPieChart([
-        { label: 'Desktop', value: 55 + Math.floor(rand() * 15), color: '#2f6bf0' },
-        { label: 'Mobile', value: 25 + Math.floor(rand() * 12), color: '#22c55e' },
-        { label: 'Tablet', value: 8 + Math.floor(rand() * 8), color: '#f59e0b' }
-      ]);
-
-      // ---- Activity feed (real account events) ----
-      var items = [];
-      items.push({ cls: '', text: 'Logged in successfully', when: lastLogin ? lastLogin.toLocaleString([], dateOpts) : 'Just now' });
-      items.push({ cls: 'blue', text: 'Total sessions so far: ' + (user.logins || 1), when: 'All-time' });
-      items.push({ cls: 'amber', text: 'Account created', when: created.toLocaleString([], dateOpts) });
-      document.getElementById('activity-list').innerHTML = items.map(function (a) {
-        return '<li><span class="dot ' + a.cls + '"></span><div>' + a.text + '<small>' + a.when + '</small></div></li>';
-      }).join('');
-
-      // ---- Logout ----
-      document.getElementById('logout-btn').addEventListener('click', Auth.logout);
-      document.getElementById('side-logout').addEventListener('click', Auth.logout);
-    }
-
-    /* ---------- LINE CHART (SVG) ---------- */
-    function renderLineChart(values, labels) {
-      var W = 560, H = 230, padL = 34, padB = 28, padT = 14;
-      var max = Math.max.apply(null, values.concat([5]));
-      function x(i) { return padL + (i * (W - padL - 14)) / (values.length - 1); }
-      function y(v) { return padT + (H - padT - padB) * (1 - v / max); }
-
-      var s = '';
-      // gridlines
-      for (var g = 0; g <= 4; g++) {
-        var gy = padT + ((H - padT - padB) * g) / 4;
-        var gv = Math.round((max * (4 - g)) / 4);
-        s += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W - 8) + '" y2="' + gy + '" stroke="#e6ebf4" stroke-width="1"/>';
-        s += '<text x="4" y="' + (gy + 4) + '" font-size="10" fill="#8a94a8">' + gv + '</text>';
-      }
-      // area + line
-      var pts = values.map(function (v, i) { return x(i).toFixed(1) + ',' + y(v).toFixed(1); });
-      s += '<polygon points="' + padL + ',' + (H - padB) + ' ' + pts.join(' ') + ' ' + (W - 14) + ',' + (H - padB) +
-        '" fill="url(#areaGrad)" opacity="0.55"/>';
-      s += '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0" stop-color="#4f8cff" stop-opacity="0.55"/>' +
-        '<stop offset="1" stop-color="#4f8cff" stop-opacity="0.05"/></linearGradient></defs>';
-      s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#2f6bf0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
-      // dots + labels
-      values.forEach(function (v, i) {
-        s += '<circle cx="' + x(i) + '" cy="' + y(v) + '" r="4.5" fill="#fff" stroke="#2f6bf0" stroke-width="3"/>';
-        s += '<text x="' + x(i) + '" y="' + (H - 8) + '" font-size="11" fill="#8a94a8" text-anchor="middle" font-weight="600">' + labels[i] + '</text>';
-      });
-      document.getElementById('line-chart').innerHTML = s;
-    }
-
-    /* ---------- BAR CHART (divs) ---------- */
-    function renderBarChart(values, labels) {
-      var max = Math.max.apply(null, values);
-      document.getElementById('bar-chart').innerHTML = values.map(function (v, i) {
-        var h = Math.max(8, Math.round((v / max) * 100));
-        return '<div class="bar-col"><span class="val">' + v + '</span>' +
-          '<div class="bar" style="height:' + h + '%"></div>' +
-          '<span class="day">' + labels[i] + '</span></div>';
-      }).join('');
-    }
-
-    /* ---------- PIE / DONUT CHART (SVG) ---------- */
-    function renderPieChart(slices) {
-      var total = slices.reduce(function (a, s) { return a + s.value; }, 0);
-      var R = 46, C = 2 * Math.PI * R, offset = 0, svg = '';
-      slices.forEach(function (s) {
-        var frac = s.value / total;
-        svg += '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="' + s.color + '" stroke-width="22" ' +
-          'stroke-dasharray="' + (frac * C).toFixed(1) + ' ' + C.toFixed(1) + '" ' +
-          'stroke-dashoffset="' + (-offset * C).toFixed(1) + '" transform="rotate(-90 60 60)"/>';
-        offset += frac;
-      });
-      svg += '<circle cx="60" cy="60" r="32" fill="#fff"/>';
-      svg += '<text x="60" y="58" text-anchor="middle" font-size="15" font-weight="800" fill="#1a2333">' + total + '</text>';
-      svg += '<text x="60" y="72" text-anchor="middle" font-size="9" fill="#8a94a8">sessions</text>';
-      document.getElementById('pie-chart').innerHTML = svg;
-      document.getElementById('pie-legend').innerHTML = slices.map(function (s) {
-        var pct = Math.round((s.value / total) * 100);
-        return '<li><i style="background:' + s.color + '"></i>' + s.label + '<b>' + pct + '%</b></li>';
-      }).join('');
-    }
-  </script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
