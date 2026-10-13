@@ -7,6 +7,8 @@ body {
   background: #e9eef6;
   color: #1a2333;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---------- HERO ---------- */
@@ -106,9 +108,11 @@ body {
 /* ---------- Panels ---------- */
 .panels {
   max-width: 1220px; margin: 0 auto;
-  padding: 58px 28px 30px;
+  width: 100%;
+  padding: 58px 28px 18px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
   align-items: stretch;
+  flex: 1;
 }
 .panel {
   background: #fbfcfe;
@@ -123,6 +127,7 @@ body {
   border-radius: 14px; padding: 14px 16px;
   display: flex; justify-content: space-between; align-items: center;
   gap: 10px; margin-bottom: 14px;
+  min-height: 68px;
 }
 .panel-head.pink { background: #fef2f2; }
 .panel-head.green { background: #ecfdf5; }
@@ -159,13 +164,14 @@ body {
 .clear-btn:hover { background: #fee2e2; }
 
 /* ---------- Task cards ---------- */
-.task-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.task-list { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; }
 .task {
   background: #fff; border-radius: 14px;
   padding: 14px 14px 13px;
-  display: flex; gap: 12px; align-items: flex-start;
+  display: flex; gap: 12px; align-items: center;
   box-shadow: 0 4px 16px rgba(20,35,70,.06);
   border: 1px solid #f0f3f9;
+  min-height: 86px;
   animation: pop .22s ease;
 }
 @keyframes pop { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
@@ -180,10 +186,10 @@ body {
 .tick:hover { border-color: #22c55e; }
 .task.done .tick { background: #22c55e; border-color: #22c55e; }
 
-.task-body { flex: 1; min-width: 0; }
+.task-body { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 .task-text { font-size: 14.8px; font-weight: 600; color: #1c2740; word-break: break-word; }
 .task.done .task-text { text-decoration: none; color: #1c2740; }
-.task-time { font-size: 12.3px; color: #8a94a8; margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.task-time { font-size: 12.3px; color: #8a94a8; margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-height: 36px; align-content: center; line-height: 1.5; }
 .task-time .sep { color: #c6cede; }
 .task-time .due { background: #e0e7ff; border-color: #c7d2fe; color: #4338ca; font-weight: 600; }
 .edit-date {
@@ -238,8 +244,9 @@ body {
 /* ---------- Footer ---------- */
 .site-footer {
   text-align: center;
-  padding: 18px 15px 26px;
-  font-size: 13px;
+  padding: 8px 15px 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
   color: #8a94a8;
 }
 .site-footer a {
