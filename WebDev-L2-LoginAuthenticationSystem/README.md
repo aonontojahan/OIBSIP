@@ -11,7 +11,7 @@ Passwords are never stored in plain text — each password is saved as a salted,
 ## Tech Used
 
 - HTML5 — Page structure
-- CSS3 — Styling, Grid / Flexbox layout
+- CSS3 — Styling, Grid layout
 - JavaScript — Auth logic, vanilla JS, Web Crypto SHA-256 + localStorage
 
 
