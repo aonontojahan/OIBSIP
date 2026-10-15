@@ -16,7 +16,7 @@ All projects are built with **HTML5 + CSS3 + Vanilla JavaScript** — no framewo
 ## 🛠️ Common Tech Stack
 
 - **HTML5** — semantic page structure
-- **CSS3** — Grid / Flexbox, gradients, responsive layout, custom theming
+- **CSS3** — Grid, gradients, responsive layout, custom theming
 - **JavaScript (Vanilla)** — app logic, no `eval()`, no libraries
 - **Web Storage** — `localStorage` for persistence, `sessionStorage` for auth sessions
 - **Web Crypto API** — SHA-256 password hashing (Login System only)
