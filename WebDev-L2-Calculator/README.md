@@ -8,7 +8,7 @@ This project is a fully functional calculator that performs basic arithmetic ope
 
 The result can be copied by clicking on the result value (`Copied!` confirmation appears). 
 
-Operator chaining is supported without requiring a full reset (e.g. `5+3×2 = 11` with correct precedence).
+Operator chaining is supported without requiring a full reset
 
 ## Tech Used
 
